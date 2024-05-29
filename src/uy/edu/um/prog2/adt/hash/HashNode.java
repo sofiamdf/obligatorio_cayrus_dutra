@@ -1,4 +1,4 @@
-package src.uy.edu.um.prog2.adt.hash;
+package uy.edu.um.prog2.adt.hash;
 
 
 import java.util.Objects;

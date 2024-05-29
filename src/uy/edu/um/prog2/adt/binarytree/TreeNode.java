@@ -1,7 +1,7 @@
 
-package src.uy.edu.um.prog2.adt.binarytree;
+package uy.edu.um.prog2.adt.binarytree;
 
-import src.uy.edu.um.prog2.adt.linkedlist.MyList;
+import uy.edu.um.prog2.adt.linkedlist.MyList;
 
 public class TreeNode<K extends Comparable<K>, V> {
 

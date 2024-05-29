@@ -1,7 +1,7 @@
-package src.uy.edu.um.prog2.adt.hash;
+package uy.edu.um.prog2.adt.hash;
 
-import src.uy.edu.um.prog2.adt.hash.HashNode;
-import src.uy.edu.um.prog2.adt.hash.MyHash;
+import uy.edu.um.prog2.adt.hash.HashNode;
+import uy.edu.um.prog2.adt.hash.MyHash;
 
 import java.util.ArrayList;
 

@@ -1,10 +1,10 @@
-package test.uy.edu.um.prog2.adt.binarytree;
+package uy.edu.um.prog2.adt.binarytree;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import src.uy.edu.um.prog2.adt.binarytree.MySearchBinaryTree;
-import src.uy.edu.um.prog2.adt.binarytree.MySearchBinaryTreeImpl;
-import src.uy.edu.um.prog2.adt.linkedlist.MyList;
+import uy.edu.um.prog2.adt.binarytree.MySearchBinaryTree;
+import uy.edu.um.prog2.adt.binarytree.MySearchBinaryTreeImpl;
+import uy.edu.um.prog2.adt.linkedlist.MyList;
 
 import static org.junit.jupiter.api.Assertions.*;
 

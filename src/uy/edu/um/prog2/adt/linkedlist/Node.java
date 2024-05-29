@@ -1,4 +1,4 @@
-package src.uy.edu.um.prog2.adt.linkedlist;
+package uy.edu.um.prog2.adt.linkedlist;
 
 public class Node<T> {
     private T value;

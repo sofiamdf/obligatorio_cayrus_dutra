@@ -1,4 +1,4 @@
-package src.uy.edu.um.prog2.adt.stack;
+package uy.edu.um.prog2.adt.stack;
 
 
 public interface MyStack<T> {

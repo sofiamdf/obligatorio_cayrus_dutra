@@ -1,9 +1,9 @@
-package test.uy.edu.um.prog2.adt.queue;
+package uy.edu.um.prog2.adt.queue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import src.uy.edu.um.prog2.adt.linkedlist.MyLinkedListImpl;
-import src.uy.edu.um.prog2.adt.queue.*;
+import uy.edu.um.prog2.adt.linkedlist.MyLinkedListImpl;
+import uy.edu.um.prog2.adt.queue.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 

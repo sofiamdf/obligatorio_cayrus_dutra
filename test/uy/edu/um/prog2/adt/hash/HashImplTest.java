@@ -1,8 +1,8 @@
-package test.uy.edu.um.prog2.adt.hash;
+package uy.edu.um.prog2.adt.hash;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import src.uy.edu.um.prog2.adt.hash.*;
+import uy.edu.um.prog2.adt.hash.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
