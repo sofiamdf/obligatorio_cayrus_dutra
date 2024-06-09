@@ -2,7 +2,6 @@ package uy.edu.um.prog2.adt.hash;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import uy.edu.um.prog2.adt.hash.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -21,7 +20,9 @@ class HashImplTest<K,V> {
         newHash.put(1, "A");
         newHash.put(2, "B");
         assertTrue(newHash.contains(1)); // check if A was placed in the list
-        newHash.put(1,"C"); // check that it changes values
+        newHash.put(1,"C"); // check that Linked list works
+        newHash.put(1,"D"); // check that Linked list works
+        newHash.put(1,"D"); // check that Linked list works
     }
 
     @Test

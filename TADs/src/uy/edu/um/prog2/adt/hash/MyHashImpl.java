@@ -38,8 +38,14 @@ public class MyHashImpl<K,V> implements MyHash<K, V> {
         }
         // si la clave ya existe, cambiamos el valor
         if (myArray.get(bucket) != null && myArray.get(bucket).equals(newHash)) {
-            System.out.printf("value " + myArray.get(bucket).getValue() + " changed to " + newHash.getValue() + "\n");
-            myArray.get(bucket).setValue(value);
+            System.out.printf("Added next Node" + "\n");
+            HashNode<K,V> currentNode = myArray.get(bucket);
+            HashNode<K,V> nextNode = currentNode.getNext();
+            while(nextNode != null){
+                currentNode = nextNode;
+                nextNode = nextNode.getNext();
+            }
+            currentNode.setNext(newHash);
 
         } // si no, insertamos el nuevo nodo
         else {
