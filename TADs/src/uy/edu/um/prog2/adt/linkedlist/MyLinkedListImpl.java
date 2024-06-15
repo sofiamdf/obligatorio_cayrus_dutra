@@ -14,6 +14,9 @@ public class MyLinkedListImpl<T> implements MyList<T>, MyQueue<T>, MyStack<T> {
         this.last = null;
     }
 
+    public void orderBy(String[] value){
+
+    }
     @Override
     public void add(T value) {
         addToTheEnd(value);

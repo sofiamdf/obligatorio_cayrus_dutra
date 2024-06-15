@@ -1,15 +1,17 @@
 package uy.edu.um.prog2.adt.hash;
 
-import uy.edu.um.prog2.adt.hash.HashNode;
-import uy.edu.um.prog2.adt.hash.MyHash;
+import uy.edu.um.prog2.adt.linkedlist.MyLinkedListImpl;
+import uy.edu.um.prog2.adt.linkedlist.MyList;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class MyHashImpl<K,V> implements MyHash<K, V> {
 
     private ArrayList<HashNode<K, V>> myArray;
     private int maxBuckets;
     private int size;
+//    private LinkedList<HashNode<K, V>> cells;
 
     public MyHashImpl() {
         myArray = new ArrayList<>();
@@ -146,5 +148,21 @@ public class MyHashImpl<K,V> implements MyHash<K, V> {
                 put(node.getKey(), node.getValue());
             }
         }
+    }
+
+    public MyList<V> get(K key) {
+        int position = getBucketPosition(key);
+        MyList<V> values = new MyLinkedListImpl<>();
+        HashNode<K,V> current = myArray.get(position);
+        if (current == null) {
+            return null;
+        }
+        while(current.getNext() != null) {
+            if(current.getKey() == key){
+                values.add(current.getValue());
+            }
+            current = current.getNext();
+        }
+        return values;
     }
 }
