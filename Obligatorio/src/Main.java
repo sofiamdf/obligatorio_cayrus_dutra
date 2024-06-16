@@ -1,17 +1,18 @@
+import uy.edu.um.prog2.adt.binarytree.MySearchBinaryTree;
+
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) throws FileNotFoundException {
         Spotify spotify = new Spotify();
-//        spotify.CreateHashTop10();
         Scanner scanner = new Scanner(System.in);
 
-        //String filePath = "Dataset obligatorio.csv";
-        //spotify.loadData(filePath);
-        spotify.OrderTop10("ZA", "2024-05-13" );
-        System.out.println("done");
+        //spotify.OrderTop10("ZA", "2024-05-13" );
+        //System.out.println("done");
+
         while(true){
             System.out.println("Seleccione el reporte que desea realizar: ");
             System.out.println("1. Top 10 canciones en un país en un día dado.");
@@ -26,11 +27,12 @@ public class Main {
 
             switch (option) {
                 case 1:
-                    System.out.println("1");
-                    //String country = scanner.nextLine();
-                    //System.out.println("Ingrese la fecha (YYYY-MM-DD):");
-                    //String date = scanner.nextLine();
-                    // ...
+                    System.out.println("Ingrese el país:");
+                    String pais = scanner.nextLine();
+                    System.out.println("Ingrese la fecha (YYYY-MM-DD):");
+                    String date = scanner.nextLine();
+                    MySearchBinaryTree<String, ArrayList<String>> tree = spotify.Top10tree(pais, date);
+                    spotify.printTop10Songs(tree);
                     break;
                 case 2:
                     System.out.println("2");
@@ -45,13 +47,11 @@ public class Main {
                     System.out.println("5");
                     break;
                 case 6:
-                    System.out.println("6");
-                    scanner.close();
+                    System.out.println("Ha salido del menu");
                     return;
                 default:
                     System.out.println("La opción ingresada es invalida. Por favor, intente nuevamente.");
             }
         }
     }
-
 }

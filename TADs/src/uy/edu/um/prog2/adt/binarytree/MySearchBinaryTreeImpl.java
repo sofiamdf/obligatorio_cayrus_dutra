@@ -103,4 +103,12 @@ public class MySearchBinaryTreeImpl<K extends Comparable<K>, V> implements MySea
         return inOrderTraverse;
     }
 
+    public MyList<V> inOrderWithValues() {
+        MyList<V> inOrderWithValuesTraverse = new MyLinkedListImpl<>();
+        if (root != null) {
+            root.inOrderWithValues(inOrderWithValuesTraverse);
+        }
+        return inOrderWithValuesTraverse;
+    }
+
 }

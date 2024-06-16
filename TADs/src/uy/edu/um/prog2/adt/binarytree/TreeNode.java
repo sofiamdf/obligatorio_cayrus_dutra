@@ -110,6 +110,12 @@ public class TreeNode<K extends Comparable<K>, V> {
         }
     }
 
+    public void inOrderWithValues(MyList<V> list) { // descending order
+        if (right != null) right.inOrderWithValues(list);
+        list.add(this.value);
+        if (left != null) left.inOrderWithValues(list);
+    }
+
     public V getValue() {
         return value;
     }

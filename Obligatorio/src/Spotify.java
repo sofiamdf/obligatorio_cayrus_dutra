@@ -119,6 +119,14 @@ public class Spotify {
         return null;
     }
 
+    public void printTop10Songs(MySearchBinaryTree<String, ArrayList<String>> tree) {
+        MyList<ArrayList<String>> inOrderList = tree.inOrderWithValues();
+        for (int i = 0; i < inOrderList.size(); i++) {
+            ArrayList<String> song = inOrderList.get(i);
+            System.out.println("Puesto: " + song.get(2) + ", Canción: " + song.get(0) + ", Artista: " + song.get(1));
+        }
+    }
+
 //    public void OrderTop10(String country, String date) throws FileNotFoundException {
 ////             String[] key = {country, date.toString()};
 ////             MyList<String[]> Songs = Top10songHash.get(key);
