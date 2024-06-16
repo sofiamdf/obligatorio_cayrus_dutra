@@ -165,4 +165,20 @@ public class MyHashImpl<K,V> implements MyHash<K, V> {
         }
         return values;
     }
+
+//    public MyList<V> get(K key) {
+//        int position = getBucketPosition(key);
+//        MyList<V> values = new MyLinkedListImpl<>();
+//        HashNode<K,V> current = myArray.get(position);
+//        if (current == null) {
+//            return null;
+//        }
+//        while(current != null) {
+//            if(current.getKey().equals(key)){
+//                values.add(current.getValue());
+//            }
+//            current = current.getNext();
+//        }
+//        return values;
+//    }
 }
