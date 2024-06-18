@@ -83,13 +83,11 @@ public class MySearchBinaryTreeImpl<K extends Comparable<K>, V> implements MySea
 
     @Override
     public void remove(K key) {
-
         if (root != null) {
 
             root = root.remove(key);
 
         }
-
     }
 
     @Override
@@ -111,4 +109,20 @@ public class MySearchBinaryTreeImpl<K extends Comparable<K>, V> implements MySea
         return inOrderWithValuesTraverse;
     }
 
+    @Override
+    // Method to return the right-root-left traversal as a list
+    public MyList<K> rightRootLeftTraversal() {
+        MyList<K> result = new MyLinkedListImpl<>();
+        rightRootLeftTraversalRec(root, result);
+        return result;
+    }
+
+    public void rightRootLeftTraversalRec(TreeNode<K, V> node, MyList<K> result) {
+        if (node == null) {
+            return;
+        }
+        rightRootLeftTraversalRec(node.getRight(), result); // Traverse right subtree
+        result.add(node.getKey()); // Visit root
+        rightRootLeftTraversalRec(node.getLeft(), result); // Traverse left subtree
+    }
 }

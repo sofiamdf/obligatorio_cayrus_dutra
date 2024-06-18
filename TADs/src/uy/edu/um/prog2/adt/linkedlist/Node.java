@@ -9,6 +9,7 @@ public class Node<T> {
         this.next = null;
     }
 
+
     public T getValue() {
         return value;
     }
