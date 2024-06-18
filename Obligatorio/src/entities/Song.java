@@ -25,5 +25,10 @@ public class Song {
     private int timeSignature;
     private MyHash<String, Artist> songArtists;
 
+
     // hacer constructor, getters y setters
+
+    public Song(String name) {
+        this.name = name;
+    }
 }

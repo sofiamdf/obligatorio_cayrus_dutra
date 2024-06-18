@@ -4,14 +4,25 @@ import uy.edu.um.prog2.adt.linkedlist.MyLinkedListImpl;
 import uy.edu.um.prog2.adt.linkedlist.MyList;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 public class MyHashImpl<K,V> implements MyHash<K, V> {
 
     private ArrayList<HashNode<K, V>> myArray;
     private int maxBuckets;
     private int size;
+    private int count;
 //    private LinkedList<HashNode<K, V>> cells;
+
+    public void increaseCount(){
+        count++;
+    }
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
 
     public MyHashImpl() {
         myArray = new ArrayList<>();
@@ -150,6 +161,7 @@ public class MyHashImpl<K,V> implements MyHash<K, V> {
         }
     }
 
+    @Override
     public MyList<V> get(K key) {
         int position = getBucketPosition(key);
         MyList<V> values = new MyLinkedListImpl<>();
@@ -181,4 +193,17 @@ public class MyHashImpl<K,V> implements MyHash<K, V> {
 //        }
 //        return values;
 //    }
+    @Override
+    public int count(K key){
+        int counter = 0;
+        int bucket = getBucketPosition(key);
+        int initialBucket = bucket;
+        while (myArray.get(bucket) != null) {
+            if (myArray.get(bucket).getKey().equals(key)) {
+                counter++;
+            }
+            bucket = (bucket + 1) % maxBuckets;
+        }
+        return counter;
+    }
 }

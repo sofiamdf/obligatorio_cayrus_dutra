@@ -1,4 +1,6 @@
+
 import uy.edu.um.prog2.adt.binarytree.MySearchBinaryTree;
+import entities.DateRange;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -13,6 +15,12 @@ public class Main {
         //spotify.OrderTop10("ZA", "2024-05-13" );
         //System.out.println("done");
 
+        //String filePath = "Dataset obligatorio.csv";
+        //spotify.loadData(filePath);
+//        spotify.OrderTop10("ZA", "2024-05-13" );
+        DateRange dateRange = new DateRange("2024-05-01", "2024-05-31");
+        spotify.getTop7Artists(dateRange);
+        System.out.println("done");
         while(true){
             System.out.println("Seleccione el reporte que desea realizar: ");
             System.out.println("1. Top 10 canciones en un país en un día dado.");

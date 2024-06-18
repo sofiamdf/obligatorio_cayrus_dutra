@@ -14,7 +14,16 @@ public class MyLinkedListImpl<T> implements MyList<T>, MyQueue<T>, MyStack<T> {
         this.last = null;
     }
 
-    public void orderBy(String[] value){
+    public Node<T> getNode(T value) {
+        for (Node<T> node = this.first; node != null; node = node.getNext()) {
+            if (node.getValue().equals(value)) {
+                return node;
+            }
+        }
+        return null;
+    }
+
+    public void insert(Node<T> value){
 
     }
     @Override
@@ -33,8 +42,6 @@ public class MyLinkedListImpl<T> implements MyList<T>, MyQueue<T>, MyStack<T> {
                 elementToAdd.setNext(this.first);
                 this.first = elementToAdd;
             }
-        } else {
-            // si el elemento es vacio se ignora
         }
     }
 
