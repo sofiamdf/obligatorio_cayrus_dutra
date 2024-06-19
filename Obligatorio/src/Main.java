@@ -12,7 +12,7 @@ public class Main {
         Spotify spotify = new Spotify();
         Scanner scanner = new Scanner(System.in);
 
-        //spotify.OrderTop10("ZA", "2024-05-13" );
+        spotify.OrderTop10("ZA", "2024-05-13" );
         //System.out.println("done");
 
         //String filePath = "Dataset obligatorio.csv";
@@ -21,15 +21,16 @@ public class Main {
 //        DateRange dateRange = new DateRange("2024-05-01", "2024-05-31");
 //        spotify.getTop7Artists(dateRange);
         LocalDate songDate = LocalDate.parse("2024-05-13");
-        spotify.getArtistData(songDate, "Taylor Swift");
+//        spotify.getArtistData(songDate, "Taylor Swift");
+//        spotify.getTop5Songs(songDate);
         System.out.println("done");
         while(true){
             System.out.println("Seleccione el reporte que desea realizar: ");
-            System.out.println("1. Top 10 canciones en un país en un día dado.");
-            System.out.println("2. Top 5 canciones que aparecen en más top 50 en un día dado.");
+            System.out.println("1. Top 10 songs en un país en un día dado.");
+            System.out.println("2. Top 5 songs que aparecen en más top 50 en un día dado.");
             System.out.println("3. Top 7 artistas que más aparecen en los top 50 para un rango de fechas dado.");
             System.out.println("4. Cantidad de veces que aparece un artísta específico en un top 50 en una fecha dada.");
-            System.out.println("5. Cantidad de canciones con un tempo en un rango específico para un rango específico de fechas.");
+            System.out.println("5. Cantidad de songs con un tempo en un rango específico para un rango específico de fechas.");
             System.out.println("6. Salir.");
 
             int option = scanner.nextInt();

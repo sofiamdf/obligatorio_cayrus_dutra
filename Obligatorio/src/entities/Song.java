@@ -24,11 +24,30 @@ public class Song {
     private double tempo;
     private int timeSignature;
     private MyHash<String, Artist> songArtists;
-
-
+    private int counter = 0;
     // hacer constructor, getters y setters
 
     public Song(String name) {
+        this.name = name;
+    }
+
+    public void increaseCounter(){
+        counter++;
+    }
+
+    public int getCounter() {
+        return counter;
+    }
+
+    public void setCounter(int counter) {
+        this.counter = counter;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
         this.name = name;
     }
 }

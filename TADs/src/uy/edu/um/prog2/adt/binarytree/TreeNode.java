@@ -111,9 +111,9 @@ public class TreeNode<K extends Comparable<K>, V> {
     }
 
     public void inOrderWithValues(MyList<V> list) { // descending order
-        if (right != null) right.inOrderWithValues(list);
-        list.add(this.value);
         if (left != null) left.inOrderWithValues(list);
+        list.add(this.value);
+        if (right != null) right.inOrderWithValues(list);
     }
 
     public V getValue() {
