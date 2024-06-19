@@ -9,5 +9,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="TADs" />
+    <orderEntry type="module" module-name="CSV" />
   </component>
 </module>

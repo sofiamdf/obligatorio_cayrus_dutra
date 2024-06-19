@@ -18,8 +18,10 @@ public class Main {
         //String filePath = "Dataset obligatorio.csv";
         //spotify.loadData(filePath);
 //        spotify.OrderTop10("ZA", "2024-05-13" );
-        DateRange dateRange = new DateRange("2024-05-01", "2024-05-31");
-        spotify.getTop7Artists(dateRange);
+//        DateRange dateRange = new DateRange("2024-05-01", "2024-05-31");
+//        spotify.getTop7Artists(dateRange);
+        LocalDate songDate = LocalDate.parse("2024-05-13");
+        spotify.getArtistData(songDate, "Taylor Swift");
         System.out.println("done");
         while(true){
             System.out.println("Seleccione el reporte que desea realizar: ");

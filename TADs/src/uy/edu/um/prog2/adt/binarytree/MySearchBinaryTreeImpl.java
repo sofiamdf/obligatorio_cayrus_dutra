@@ -111,18 +111,18 @@ public class MySearchBinaryTreeImpl<K extends Comparable<K>, V> implements MySea
 
     @Override
     // Method to return the right-root-left traversal as a list
-    public MyList<K> rightRootLeftTraversal() {
-        MyList<K> result = new MyLinkedListImpl<>();
+    public MyList<V> rightRootLeftTraversal() {
+        MyList<V> result = new MyLinkedListImpl<>();
         rightRootLeftTraversalRec(root, result);
         return result;
     }
 
-    public void rightRootLeftTraversalRec(TreeNode<K, V> node, MyList<K> result) {
+    public void rightRootLeftTraversalRec(TreeNode<K, V> node, MyList<V> result) {
         if (node == null) {
             return;
         }
         rightRootLeftTraversalRec(node.getRight(), result); // Traverse right subtree
-        result.add(node.getKey()); // Visit root
+        result.add(node.getValue()); // Visit root
         rightRootLeftTraversalRec(node.getLeft(), result); // Traverse left subtree
     }
 }

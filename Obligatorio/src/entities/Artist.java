@@ -10,7 +10,7 @@ public class Artist {
     private int counter = 0;
 
 
-    public void increaseCounter(){
+    public void increaseCounter() {
         counter++;
     }
 
@@ -40,5 +40,13 @@ public class Artist {
 
     public void setCounter(int counter) {
         this.counter = counter;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Artist artist = (Artist) o;
+        return name.equals(artist.name);
     }
 }

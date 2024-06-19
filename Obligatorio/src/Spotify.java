@@ -17,7 +17,7 @@ import java.util.LinkedList;
 
 public class Spotify {
     // 1er reporte
-    MyList<Artist> artists;
+    MyHash<String, Artist> artists = new MyHashImpl<>();
     MySearchBinaryTree<Integer, String> top7ArtistTree = new MySearchBinaryTreeImpl<>();
     MySearchBinaryTree<String, ArrayList<String>> top10songTree = new MySearchBinaryTreeImpl<>();
     MyList<String> top5List = new MyLinkedListImpl<>();
@@ -149,7 +149,7 @@ public class Spotify {
 
         MySearchBinaryTree top10 = Top10tree(country, date);
         for (int i = 1; i <= 10; i++) {
-            ArrayList<String> songs = (ArrayList<String>) top10.find(String.valueOf(i)); // Use String keys
+            ArrayList<String> songs = (ArrayList<String>) top10.find(String.valueOf(i));
             if (songs != null) {
                 System.out.println("Top " + i + ": " + songs);
             } else {
@@ -285,67 +285,118 @@ public class Spotify {
 //    }
 
     public void insertSongsToArtists(DateRange dates) {
+
+//        String path1 = "/Users/aguscayrus/universal_top_spotify_songs-1.csv";
+//        String path2 = "C:\\Users\\smdf2\\OneDrive\\Escritorio\\Facultad\\3er Semestre\\Programación 2\\Dataset obligatorio.csv";
+//        try {
+//            BufferedReader br;
+//
+//            try {
+//                br = new BufferedReader(new FileReader(path1));
+//            } catch (FileNotFoundException e1) {
+//                br = new BufferedReader(new FileReader(path2));
+//            }
+//
+//             String line = br.readLine();
+//            while ((line = br.readLine()) != null) {
+//                int fixescomma = 7;
+//                line = line.replace("\"\"", "\"").replaceAll("^\"|\"$", "");
+//                String[] data = line.split(",\"");
+//                for (int i = 0; i < data.length; i++) {
+//                    data[i] = data[i].replace("\"", "");
+//                }
+//                if (data.length > 25){
+//                    fixescomma++;
+//                }
+//                LocalDate songDate = LocalDate.parse(data[fixescomma]);  // Assuming data[7] is the date
+//                if (dates.contains(songDate)) {
+//                    String[] artistNames = data[2].split(", ");  // Assuming data[2] is the artist field
+//                    for (String artistName : artistNames) {
+//                        Artist artist = artists.getValue(artistName);
+//                        if (artist == null) {
+//                            Artist newArtist = new Artist(artistName);
+//                            artists.put(artistName, newArtist);
+//                        } else {
+//                            artist.increaseCounter();
+//                        }
+//                    }
+//                }
+//            }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+        //}
         String path1 = "/Users/aguscayrus/universal_top_spotify_songs-1.csv";
         String path2 = "C:\\Users\\smdf2\\OneDrive\\Escritorio\\Facultad\\3er Semestre\\Programación 2\\Dataset obligatorio.csv";
-
-        try {
-            BufferedReader br;
-
-            try {
-                br = new BufferedReader(new FileReader(path1));
-            } catch (FileNotFoundException e1) {
-                br = new BufferedReader(new FileReader(path2));
-            }
-
-            String line = br.readLine();
-            while ((line = br.readLine()) != null) {
-                line = line.replace("\"\"", "\"").replaceAll("^\"|\"$", "");
-                String[] data = line.split(",\"");
-                for (int i = 0; i < data.length; i++) {
-                    data[i] = data[i].replace("\"", "");
-                }
-                LocalDate songDate = LocalDate.parse(data[7]);  // Assuming data[7] is the date
-                if (dates.contains(songDate)) {
-                    String[] artistNames = data[2].split(", ");  // Assuming data[2] is the artist field
-
-                    for (String artistName : artistNames) {
-                        // Create a new Artist object or retrieve existing one if available
-                        Artist artist = findOrCreateArtist(artistName);
-                        artist.increaseCounter();
-                        // Output for verification (print or further processing)
-                    }
-                }
+        try (BufferedReader br = new BufferedReader(new FileReader(path1))) {
+            insertArtists(br, dates);
+        } catch (FileNotFoundException e) {
+            try (BufferedReader br = new BufferedReader(new FileReader(path2))) {
+                insertArtists(br, dates);
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public Artist findOrCreateArtist(String artistName) {
-        Artist newArtist = new Artist(artistName);
-        if (artists.contains(newArtist)) {
-            for (int i = 0; i < artists.size(); i++) {
-                if (artists.get(i).equals(newArtist)) {
-                    return artists.get(i);
+    private void insertArtists(BufferedReader br, DateRange dates) throws IOException {
+        String line;
+        br.readLine();
+        while ((line = br.readLine()) != null) {
+            line = line.replace("\"\"", "\"").replaceAll("^\"|\"$", "");
+            String[] data = line.split(",\"");
+            if (data.length > 25) {
+                data[7] = data[8];
+            }
+            data[7] = data[7].replace("\"", "");
+            LocalDate songDate = LocalDate.parse(data[7]);
+
+            if (dates.contains(songDate)) {
+                String[] artistNames = data[2].split(", ");
+                for (String name : artistNames) {
+                    String artistName = name.replaceAll("\"$", "");
+                    Artist artist = artists.getValue(artistName);
+                    if (artist == null) {
+                        Artist newArtist = new Artist(artistName);
+                        artists.put(artistName, newArtist);
+                        newArtist.increaseCounter();
+                    } else {
+                        artist.increaseCounter();
+                    }
                 }
             }
         }
-        // Logic to find or create Artist objects goes here
-        // For simplicity, let's assume we're just creating new Artist objects each time
-        return new Artist(artistName);
+    }
+
+
+    public Artist findOrCreateArtist(String artistName) {
+        Artist artist = artists.getValue(artistName);
+        if (artist == null) {
+            Artist newArtist = new Artist(artistName);
+            artists.put(artistName, newArtist);
+            return newArtist;
+        } else {
+            artist.increaseCounter();
+            return artist;
+    }
     }
 
 
     public void getTop7Artists(DateRange dates) {
         insertSongsToArtists(dates);
-        for (int i = 0; i < artists.size(); i++) {
-            top7ArtistTree.add(artists.get(i).getCounter(), artists.get(i).getName());
-        }
-        MyList orderdList = top7ArtistTree.rightRootLeftTraversal();
-        for (int i = 1; i <= 7; i++) {
-            String artist = orderdList.get(i).toString(); // Use String keys
+        for (int i = 0; i < artists.getSize(); i++) {
+            Artist artist = artists.getIndex(i);
             if (artist != null) {
-                System.out.println("Top " + i + ": " + artist);
+                top7ArtistTree.add(artist.getCounter(), artist.getName());
+            }
+        }
+        MyList<String> orderdList = top7ArtistTree.rightRootLeftTraversal();
+        for (int i = 0; i <= 7; i++) {
+            String artist = orderdList.get(i);
+            if (artist != null) {
+                System.out.println("Top " + (i + 1) + ": " + artist);
             } else {
                 System.out.println("Top " + i + " not found.");
             }
@@ -354,43 +405,86 @@ public class Spotify {
 
 
 
-    public void getArtistCount(String date, String nameArtist){
+    public void getArtistData(LocalDate date, String nameArtist){
+
         String path1 = "/Users/aguscayrus/universal_top_spotify_songs-1.csv";
         String path2 = "C:\\Users\\smdf2\\OneDrive\\Escritorio\\Facultad\\3er Semestre\\Programación 2\\Dataset obligatorio.csv";
-
-                try {
-                    BufferedReader br;
-
-                    try {
-                        br = new BufferedReader(new FileReader(path1));
-                    } catch (FileNotFoundException e1) {
-                        br = new BufferedReader(new FileReader(path2));
-                    }
-
-                    String line = br.readLine();
-                    Artist artist = new Artist(nameArtist);
-                    while ((line = br.readLine()) != null) {
-                        line = line.replace("\"\"", "\"").replaceAll("^\"|\"$", "");
-                        String[] data = line.split(",\"");
-                        for (int i = 0; i < data.length; i++) {
-                            data[i] = data[i].replace("\"", "");
-                        }
-                        if (data[7].equals(date)) {
-                            String[] artistNames = data[2].split(", ");  // Assuming data[2] is the artist field
-                            for (String artistName : artistNames) {
-                                if (artistName.equals(nameArtist)) {
-                                    // Create a new Artist object or retrieve existing one if available
-                                    artist.increaseCounter();
-                                }
-                                // Output for verification (print or further processing)
-                            }
-                        }
-                    }
-                    System.out.println(artist.getCounter());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+        try (BufferedReader br = new BufferedReader(new FileReader(path1))) {
+            getCountArtist(br, date, nameArtist);
+        } catch (FileNotFoundException e) {
+            try (BufferedReader br = new BufferedReader(new FileReader(path2))) {
+                getCountArtist(br, date, nameArtist);
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+    }
+
+    private void getCountArtist(BufferedReader br, LocalDate date, String nameArtist) throws IOException {
+        String line;
+        br.readLine();
+        while ((line = br.readLine()) != null) {
+            line = line.replace("\"\"", "\"").replaceAll("^\"|\"$", "");
+            String[] data = line.split(",\"");
+            if (data.length > 25) {
+                data[7] = data[8];
+            }
+            data[7] = data[7].replace("\"", "");
+            LocalDate songDate = LocalDate.parse(data[7]);
+
+            if (date.equals(songDate)) {
+                String[] artistNames = data[2].split(", ");
+                for (String name : artistNames) {
+                    String artistName = name.replaceAll("\"$", "");
+                    if (artistName.equals(nameArtist)) {
+                        Artist artist = findOrCreateArtist(nameArtist);
+                        artist.increaseCounter();
+                    }
+                    }
+                }
+            }
+        Artist thisArtist = findOrCreateArtist(nameArtist);
+        if(thisArtist == null) {
+            throw new FileNotFoundException();
+        }
+        System.out.println(thisArtist.getName() + " had " + thisArtist.getCounter() + " songs in the top50 on " + date.toString());
+    }
+//        String path1 = "/Users/aguscayrus/universal_top_spotify_songs-1.csv";
+//        String path2 = "C:\\Users\\smdf2\\OneDrive\\Escritorio\\Facultad\\3er Semestre\\Programación 2\\Dataset obligatorio.csv";
+//
+//                try {
+//                    BufferedReader br;
+//
+//                    try {
+//                        br = new BufferedReader(new FileReader(path1));
+//                    } catch (FileNotFoundException e1) {
+//                        br = new BufferedReader(new FileReader(path2));
+//                    }
+//
+//                    String line = br.readLine();
+//                    Artist artist = new Artist(nameArtist);
+//                    while ((line = br.readLine()) != null) {
+//                        line = line.replace("\"\"", "\"").replaceAll("^\"|\"$", "");
+//                        String[] data = line.split(",\"");
+//                        for (int i = 0; i < data.length; i++) {
+//                            data[i] = data[i].replace("\"", "");
+//                        }
+//                        if (data[7].equals(date)) {
+//                            String[] artistNames = data[2].split(", ");  // Assuming data[2] is the artist field
+//                            for (String artistName : artistNames) {
+//                                if (artistName.equals(nameArtist)) {
+//                                    artist.increaseCounter();
+//                                }
+//                            }
+//                        }
+//                    }
+//                    System.out.println(artist.getCounter());
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//        }
 
     public void insertSongs(DateRange dates) {
         String path1 = "/Users/aguscayrus/universal_top_spotify_songs-1.csv";
