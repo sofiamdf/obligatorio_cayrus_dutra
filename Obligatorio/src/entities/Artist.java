@@ -14,8 +14,8 @@ public class Artist {
         counter++;
     }
 
-    public Artist(String name) {
-        this.name = name;
+    public Artist(String nameParam) {
+        name = nameParam;
     }
 
     public ArrayList<Song> getArtistSongs() {
