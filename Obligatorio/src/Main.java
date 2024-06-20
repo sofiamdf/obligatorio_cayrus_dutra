@@ -22,6 +22,13 @@ public class Main {
         //spotify.getTop7Artists(dateRange);
         //System.out.println("done");
 
+        //Test reporte 5 - todavia no lo probe
+        //DateRange dateRange = new DateRange("2024-05-01", "2024-05-31");
+        //float minTempo = 100.0f;
+        //float maxTempo = 120.0f;
+        //spotify.countSongsByTempo(dateRange, minTempo, maxTempo);
+        //System.out.println("done");
+
         while(true){
             System.out.println("Seleccione el reporte que desea realizar: ");
             System.out.println("1. Top 10 canciones en un país en un día dado.");
