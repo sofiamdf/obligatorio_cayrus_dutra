@@ -295,7 +295,7 @@ public class Spotify {
                 }
                 LocalDate songDate = LocalDate.parse(data[7]);
                 if (dates.contains(songDate)) {
-                    float tempo = Float.parseFloat(data[9]); // data[9] es el tempo
+                    float tempo = Float.parseFloat(data[23]); // data[23] es el tempo
                     if (tempo >= minTempo && tempo <= maxTempo) {
                         count++;
                     }
