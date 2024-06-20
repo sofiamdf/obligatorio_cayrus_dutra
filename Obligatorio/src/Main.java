@@ -13,16 +13,25 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         //          TESTS
+        // String filePath = "Dataset obligatorio.csv";
+        // spotify.loadData(filePath);
+        //1.
         //spotify.OrderTop10("ZA", "2024-05-13" );
         //System.out.println("done");
-        //String filePath = "Dataset obligatorio.csv";
-        //spotify.loadData(filePath);
-        //spotify.OrderTop10("ZA", "2024-05-13" );
-        //DateRange dateRange = new DateRange("2024-05-01", "2024-05-31");
-        //spotify.getTop7Artists(dateRange);
+        //2.
+        // DateRange dateRange = new DateRange("2024-05-01", "2024-05-31");
+        // spotify.getTop7Artists(dateRange);
+        // System.out.println("done");
+        //3.
+        //LocalDate songDate = LocalDate.parse("2024-05-13");
+        //spotify.getArtistData(songDate, "Taylor Swift");
+        //spotify.getTop5Songs(songDate);
+        //spotify.getArtistData(songDate, "Taylor Swift");
         //System.out.println("done");
-
-        //Test reporte 5 - todavia no lo probe
+        //4.
+        //spotify.getTop5Songs(songDate);
+        //System.out.println("done");
+        // 5.
         //DateRange dateRange = new DateRange("2024-05-01", "2024-05-31");
         //float minTempo = 100.0f;
         //float maxTempo = 120.0f;
@@ -47,7 +56,7 @@ public class Main {
                     String pais = scanner.nextLine();
                     System.out.println("Ingrese la fecha (YYYY-MM-DD):");
                     String date = scanner.nextLine();
-                    MySearchBinaryTree<String, ArrayList<String>> tree = spotify.Top10tree(pais, date);
+                    MySearchBinaryTree<Integer, ArrayList<String>> tree = spotify.Top10tree(pais, date);
                     spotify.printTop10Songs(tree);
                     break;
                 case 2:
