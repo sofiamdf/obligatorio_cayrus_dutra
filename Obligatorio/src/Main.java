@@ -31,8 +31,7 @@ public class Main {
                     String pais = scanner.nextLine();
                     System.out.println("Ingrese la fecha (YYYY-MM-DD):");
                     String date = scanner.nextLine();
-
-
+                    
                     long memoryBefore1 = MemoryMeasurement.getUsedMemory();
                     long report1Time = TimeMeasurement.measureExecutionTime(() -> {
                         MySearchBinaryTree<Integer, ArrayList<String>> tree = null;
