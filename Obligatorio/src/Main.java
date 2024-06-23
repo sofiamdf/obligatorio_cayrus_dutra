@@ -75,8 +75,8 @@ public class Main {
                     long memoryAfter1 = MemoryMeasurement.getUsedMemory();
                     long memoryUsedFor1 = memoryAfter1 - memoryBefore1;
 
-                    System.out.println("Memoria utilizada para Top 10 Songs Report: " + memoryUsedFor1 + " bytes");
-                    System.out.println("Tiempo de ejecución para Top 10 Songs Report: " + report1Time + " ms");
+                    System.out.println("Memoria utilizada para Reporte 1: " + memoryUsedFor1 + " bytes");
+                    System.out.println("Tiempo de ejecución para Reporte 1: " + report1Time + " ms");
                     break;
 
                 case 2:
@@ -89,8 +89,8 @@ public class Main {
                     long memoryAfter2 = MemoryMeasurement.getUsedMemory();
                     long memoryUsedFor2 = memoryAfter2 - memoryBefore2;
 
-                    System.out.println("Memoria utilizada para Top 10 Songs Report: " + memoryUsedFor2 + " bytes");
-                    System.out.println("Tiempo de ejecución para Top 10 Songs Report: " + report2Time + " ms");
+                    System.out.println("Memoria utilizada para Reporte 2: " + memoryUsedFor2 + " bytes");
+                    System.out.println("Tiempo de ejecución para Reporte 2: " + report2Time + " ms");
                     break;
 
                 case 3:
@@ -107,8 +107,8 @@ public class Main {
                     long memoryAfter3 = MemoryMeasurement.getUsedMemory();
                     long memoryUsedFor3 = memoryAfter3 - memoryBefore3;
 
-                    System.out.println("Memoria utilizada para Top 7 Artists Report: " + memoryUsedFor3 + " bytes");
-                    System.out.println("Tiempo de ejecución para Top 7 Artists Report: " + report3Time + " ms");
+                    System.out.println("Memoria utilizada para Reporte 3: " + memoryUsedFor3 + " bytes");
+                    System.out.println("Tiempo de ejecución para Reporte 3: " + report3Time + " ms");
                     break;
 
                 case 4:
@@ -124,8 +124,8 @@ public class Main {
                     long memoryAfter4 = MemoryMeasurement.getUsedMemory();
                     long memoryUsedFor4 = memoryAfter4 - memoryBefore4;
 
-                    System.out.println("Memoria utilizada para Artist Appearances Report: " + memoryUsedFor4 + " bytes");
-                    System.out.println("Tiempo de ejecución para Artist Appearances Report: " + report4Time + " ms");
+                    System.out.println("Memoria utilizada para Reporte 4: " + memoryUsedFor4 + " bytes");
+                    System.out.println("Tiempo de ejecución para Reporte 4: " + report4Time + " ms");
                     break;
 
 
@@ -147,8 +147,8 @@ public class Main {
                     long memoryAfter5 = MemoryMeasurement.getUsedMemory();
                     long memoryUsedFor5 = memoryAfter5 - memoryBefore5;
 
-                    System.out.println("Memoria utilizada para Songs by Tempo Range Report: " + memoryUsedFor5 + " bytes");
-                    System.out.println("Tiempo de ejecución para Songs by Tempo Range Report: " + report5Time + " ms");
+                    System.out.println("Memoria utilizada para Reporte 5: " + memoryUsedFor5 + " bytes");
+                    System.out.println("Tiempo de ejecución para Reporte 5: " + report5Time + " ms");
                     break;
 
                 case 6:
