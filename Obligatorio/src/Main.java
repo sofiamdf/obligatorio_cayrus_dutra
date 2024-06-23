@@ -12,35 +12,6 @@ public class Main {
         Spotify spotify = new Spotify();
         Scanner scanner = new Scanner(System.in);
 
-        /*     TESTS
-         String filePath = "Dataset obligatorio.csv";
-         spotify.loadData(filePath);
-        1.
-        spotify.OrderTop10("ZA", "2024-05-04" );
-        System.out.println("done");
-        3.
-         DateRange dateRange = new DateRange("2024-05-01", "2024-05-31");
-         spotify.getTop7Artists(dateRange);
-         System.out.println("done");
-        2.
-        LocalDate songDate = LocalDate.parse("2024-05-04");
-        spotify.getTop5Songs(songDate);
-        System.out.println("done");
-        4.
-        spotify.getArtistData(songDate, "Taylor Swift");
-        System.out.println("done");
-
-        2.
-        spotify.getTop5Songs(songDate);
-        System.out.println("done");
-          5.
-        DateRange dateRange = new DateRange("2024-01-01", "2024-03-18");
-        float minTempo = 100.000f;
-        float maxTempo = 110.000f;
-        spotify.countSongsByTempo(dateRange, minTempo, maxTempo);
-        System.out.println("done");
-         */
-
         while(true){
             System.out.println("Seleccione el reporte que desea realizar: ");
             System.out.println("1. Top 10 canciones en un país en un día dado.");

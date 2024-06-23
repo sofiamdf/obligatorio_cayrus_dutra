@@ -137,7 +137,6 @@ public class Spotify {
         for (int i = 0; i < songs.getSize(); i++) {
             Song song = songs.getIndex(i);
             if (song != null) {
-                if(song.getName().equals("Gata Only"))
                 top5SongTree.add(song.getCounter(), song.getName());
             }
         }
