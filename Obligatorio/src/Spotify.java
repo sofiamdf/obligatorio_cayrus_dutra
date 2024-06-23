@@ -53,7 +53,7 @@ public class Spotify {
                 }
                 String currentCountry = data[6];
                 String currentDate = data[7];
-                if (currentCountry.equals(pais) && currentDate.equals(date)) {
+                if (currentCountry.equals(pais) && currentDate.equals(date) && Integer.parseInt(data[3]) <= 10) {
                     ArrayList<String> list = new ArrayList();
                     list.add(data[1]);
                     list.add(data[2]);
@@ -71,7 +71,7 @@ public class Spotify {
 
     public void printTop10Songs(MySearchBinaryTree<Integer, ArrayList<String>> tree) {
         MyList<ArrayList<String>> inOrderList = tree.inOrderWithValues();
-        for (int i = 0; i < inOrderList.size(); i++) {
+        for (int i = 0; i <= 9; i++) {
             ArrayList<String> song = inOrderList.get(i);
             System.out.println("Puesto: " + song.get(2) + ", Canción: " + song.get(0) + ", Artista: " + song.get(1));
         }
@@ -335,7 +335,18 @@ public class Spotify {
         específico de fechas.
      */
 
-    public void countSongsByTempo (DateRange dates,float minTempo, float maxTempo){
+    public Song findOrCountSong (String songName){
+        Song song = songs.getValue(songName);
+        if (song == null) {
+            Song newSong = new Song(songName);
+            songs.put(songName, newSong);
+            return null;
+        } else {
+            return song;
+        }
+    }
+
+    public void countSongsByTempo (DateRange dates,float minTempo, float maxTempo) {
         String path1 = "/Users/aguscayrus/universal_top_spotify_songs-1.csv";
         String path2 = "C:\\Users\\smdf2\\OneDrive\\Escritorio\\Facultad\\3er Semestre\\Programación 2\\Dataset obligatorio.csv";
 
@@ -343,7 +354,6 @@ public class Spotify {
 
         try {
             BufferedReader br;
-
             try {
                 br = new BufferedReader(new FileReader(path1));
             } catch (FileNotFoundException e1) {
@@ -357,11 +367,17 @@ public class Spotify {
                 for (int i = 0; i < data.length; i++) {
                     data[i] = data[i].replace("\"", "");
                 }
+                if (data.length > 25) {
+                    data[7] = data[8];
+                    data[23] = data[24];
+                }
                 LocalDate songDate = LocalDate.parse(data[7]);
                 if (dates.contains(songDate)) {
                     float tempo = Float.parseFloat(data[23]); // data[23] es el tempo
                     if (tempo >= minTempo && tempo <= maxTempo) {
-                        count++;
+                        if(findOrCountSong(data[1]) == null) {
+                            count++;
+                        }
                     }
                 }
             }

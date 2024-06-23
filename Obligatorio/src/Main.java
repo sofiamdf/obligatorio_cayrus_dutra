@@ -18,25 +18,29 @@ public class Main {
         //1.
         //spotify.OrderTop10("ZA", "2024-05-13" );
         //System.out.println("done");
-        //2.
+        //3.
         // DateRange dateRange = new DateRange("2024-05-01", "2024-05-31");
         // spotify.getTop7Artists(dateRange);
         // System.out.println("done");
-        //3.
+        //2.
+//        LocalDate songDate = LocalDate.parse("2024-03-18");
+//        spotify.getTop5Songs(songDate);
+//        System.out.println("done");
+        //4.
         //LocalDate songDate = LocalDate.parse("2024-05-13");
         //spotify.getArtistData(songDate, "Taylor Swift");
         //spotify.getTop5Songs(songDate);
         //spotify.getArtistData(songDate, "Taylor Swift");
         //System.out.println("done");
-        //4.
+        //2.
         //spotify.getTop5Songs(songDate);
         //System.out.println("done");
         // 5.
-        //DateRange dateRange = new DateRange("2024-05-01", "2024-05-31");
-        //float minTempo = 100.0f;
-        //float maxTempo = 120.0f;
-        //spotify.countSongsByTempo(dateRange, minTempo, maxTempo);
-        //System.out.println("done");
+//        DateRange dateRange = new DateRange("2024-05-01", "2024-05-31");
+//        float minTempo = 100.000f;
+//        float maxTempo = 100.001f;
+//        spotify.countSongsByTempo(dateRange, minTempo, maxTempo);
+//        System.out.println("done");
 
         while(true){
             System.out.println("Seleccione el reporte que desea realizar: ");
@@ -51,6 +55,7 @@ public class Main {
             scanner.nextLine();
 
             switch (option) {
+
                 case 1:
                     System.out.println("Ingrese el país:");
                     String pais = scanner.nextLine();
@@ -59,11 +64,13 @@ public class Main {
                     MySearchBinaryTree<Integer, ArrayList<String>> tree = spotify.Top10tree(pais, date);
                     spotify.printTop10Songs(tree);
                     break;
+
                 case 2:
                     System.out.println("Ingrese la fecha (YYYY-MM-DD):");
-                    String date2 = scanner.nextLine();
-                    spotify.printTop5Songs(date2);
+                    LocalDate date2 = LocalDate.parse(scanner.nextLine());
+                    spotify.getTop5Songs(date2);
                     break;
+
                 case 3:
                     System.out.println("Ingrese la fecha de inicio (YYYY-MM-DD):");
                     String startDate = scanner.nextLine();
@@ -72,28 +79,32 @@ public class Main {
                     DateRange range = new DateRange(startDate, endDate);
                     spotify.getTop7Artists(range);
                     break;
+
                 case 4:
                     System.out.println("Ingrese la fecha (YYYY-MM-DD):");
-                    String date3 = scanner.nextLine();
+                    LocalDate date3 = LocalDate.parse(scanner.nextLine());
                     System.out.println("Ingrese el nombre del artista:");
                     String artistName = scanner.nextLine();
-                    spotify.getArtistCount(date3, artistName);
+                    spotify.getArtistData(date3, artistName);
                     break;
+
                 case 5:
                     System.out.println("Ingrese la fecha de inicio (YYYY-MM-DD):");
                     String startDate2 = scanner.nextLine();
                     System.out.println("Ingrese la fecha de fin (YYYY-MM-DD):");
                     String endDate2 = scanner.nextLine();
                     System.out.println("Ingrese el tempo mínimo:");
-                    float minTempo = scanner.nextFloat();
+                    Float minTempo = scanner.nextFloat();
                     System.out.println("Ingrese el tempo máximo:");
-                    float maxTempo = scanner.nextFloat();
+                    Float maxTempo = scanner.nextFloat();
                     DateRange tempoRange = new DateRange(startDate2, endDate2);
                     spotify.countSongsByTempo(tempoRange, minTempo, maxTempo);
                     break;
+
                 case 6:
                     System.out.println("Ha salido del menu");
                     return;
+
                 default:
                     System.out.println("La opción ingresada es invalida. Por favor, intente nuevamente.");
             }
