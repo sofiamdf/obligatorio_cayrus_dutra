@@ -23,12 +23,36 @@ public class Song {
     private double valence;
     private double tempo;
     private int timeSignature;
-    private MyHash<String, Artist> songArtists;
-
-
-    // hacer constructor, getters y setters
+    private String[] artista;
+    private int counter = 0;
 
     public Song(String name) {
         this.name = name;
     }
+
+    public Song(String name, String artist) {
+        this.name = name;
+        this.artista = artist.split(",");
+    }
+
+    public void increaseCounter(){
+        counter++;
+    }
+
+    public int getCounter() {
+        return counter;
+    }
+
+    public void setCounter(int counter) {
+        this.counter = counter;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
 }

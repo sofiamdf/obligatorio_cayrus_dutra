@@ -11,7 +11,6 @@ public class CSVReader {
        // String path1 = "/Users/aguscayrus/universal_top_spotify_songs-1.csv";
        // String path2 = "\"C:\\Users\\smdf2\\OneDrive\\Escritorio\\Facultad\\3er Semestre\\Programación 2\\Dataset obligatorio.csv\"";
 
-
 //        try {
 //            BufferedReader br;
 //

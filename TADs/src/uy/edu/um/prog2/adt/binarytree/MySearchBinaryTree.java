@@ -15,5 +15,6 @@ public interface MySearchBinaryTree<K extends Comparable<K>, V> {
     MyList<K> inOrder();
 
     MyList<V> inOrderWithValues();
-    MyList<K> rightRootLeftTraversal();
+
+    MyList<V> rightRootLeftTraversal();
 }

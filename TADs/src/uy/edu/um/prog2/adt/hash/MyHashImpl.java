@@ -11,7 +11,7 @@ public class MyHashImpl<K,V> implements MyHash<K, V> {
     private int maxBuckets;
     private int size;
     private int count;
-//    private LinkedList<HashNode<K, V>> cells;
+    // private LinkedList<HashNode<K, V>> cells;
 
     public void increaseCount(){
         count++;
@@ -26,7 +26,7 @@ public class MyHashImpl<K,V> implements MyHash<K, V> {
 
     public MyHashImpl() {
         myArray = new ArrayList<>();
-        maxBuckets = 13; //numero inicial de buckets
+        maxBuckets = 5000; //numero inicial de buckets
         size = 0;
 
         for (int i = 0; i < maxBuckets; i++) {
@@ -37,6 +37,11 @@ public class MyHashImpl<K,V> implements MyHash<K, V> {
     private int getBucketPosition(K key) {
         int hashPosition = key.hashCode();
         return Math.abs(hashPosition % maxBuckets);
+    }
+
+    @Override
+    public int getSize() {
+        return this.size;
     }
 
     @Override
@@ -51,7 +56,6 @@ public class MyHashImpl<K,V> implements MyHash<K, V> {
         }
         // si la clave ya existe, cambiamos el valor
         if (myArray.get(bucket) != null && myArray.get(bucket).equals(newHash)) {
-            System.out.printf("Added next Node" + "\n");
             HashNode<K,V> currentNode = myArray.get(bucket);
             HashNode<K,V> nextNode = currentNode.getNext();
             while(nextNode != null){
@@ -63,7 +67,6 @@ public class MyHashImpl<K,V> implements MyHash<K, V> {
         } // si no, insertamos el nuevo nodo
         else {
             myArray.set(bucket, newHash);
-            System.out.printf(newHash.getValue() + " added " + "\n");
             size++;
         }
 
@@ -141,9 +144,16 @@ public class MyHashImpl<K,V> implements MyHash<K, V> {
 
             }
         } else {
-            System.out.println("El bucket asignado es nulo");
             throw new EntidadNoExiste();
         }
+    }
+
+    @Override
+    public V getIndex(int index) {
+        if (this.myArray.get(index) == null){
+            return null;
+        }
+        return this.myArray.get(index).getValue();
     }
 
     public void resize(int newMaxBuckets){
@@ -193,6 +203,7 @@ public class MyHashImpl<K,V> implements MyHash<K, V> {
 //        }
 //        return values;
 //    }
+
     @Override
     public int count(K key){
         int counter = 0;
@@ -205,5 +216,21 @@ public class MyHashImpl<K,V> implements MyHash<K, V> {
             bucket = (bucket + 1) % maxBuckets;
         }
         return counter;
+    }
+
+    @Override
+    public V getValue(K key) {
+        int position = getBucketPosition(key);
+        HashNode<K, V> current = myArray.get(position);
+        if (current == null) {
+            return null;
+        }
+        while (current != null) {
+            if (current.getKey().equals(key)) {
+                return current.getValue();
+            }
+            current = current.getNext();
+        }
+        return null;
     }
 }

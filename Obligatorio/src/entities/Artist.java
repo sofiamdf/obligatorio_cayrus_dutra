@@ -14,8 +14,8 @@ public class Artist {
         counter++;
     }
 
-    public Artist(String name) {
-        this.name = name;
+    public Artist(String nameParam) {
+        name = nameParam;
     }
 
     public ArrayList<Song> getArtistSongs() {
@@ -41,4 +41,13 @@ public class Artist {
     public void setCounter(int counter) {
         this.counter = counter;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Artist artist = (Artist) o;
+        return name.equals(artist.name);
+    }
+
 }

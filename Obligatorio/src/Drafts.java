@@ -350,3 +350,7 @@ public class ObligatorioImpl implements Obligatorio {
 //
 //        }
 //    }
+// order top10
+// String[] key = {country, date.toString()};
+//             MyList<String[]> Songs = Top10songHash.get(key);
+//             top10songTree.
