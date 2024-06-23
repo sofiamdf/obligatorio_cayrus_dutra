@@ -5,34 +5,11 @@ import uy.edu.um.prog2.adt.hash.MyHash;
 import java.time.LocalDate;
 
 public class Song {
-    private String spotifyId;
     private String name;
-    private boolean isExplicit;
-    private int durationMs;
-    private String albumName;
-    private LocalDate albumReleaseDate;
-    private double danceability;
-    private double energy;
-    private int key;
-    private double loudness;
-    private double mode;
-    private double speechiness;
-    private double acousticness;
-    private double instrumentalness;
-    private double liveness;
-    private double valence;
-    private double tempo;
-    private int timeSignature;
-    private String[] artista;
     private int counter = 0;
 
     public Song(String name) {
         this.name = name;
-    }
-
-    public Song(String name, String artist) {
-        this.name = name;
-        this.artista = artist.split(",");
     }
 
     public void increaseCounter(){

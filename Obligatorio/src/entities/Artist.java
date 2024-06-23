@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 public class Artist {
     private String name;
-    private ArrayList<Song> artistSongs;
     private int counter = 0;
 
 
@@ -16,14 +15,6 @@ public class Artist {
 
     public Artist(String nameParam) {
         name = nameParam;
-    }
-
-    public ArrayList<Song> getArtistSongs() {
-        return artistSongs;
-    }
-
-    public void setArtistSongs(ArrayList<Song> artistSongs) {
-        this.artistSongs = artistSongs;
     }
 
     public String getName() {

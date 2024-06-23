@@ -13,34 +13,32 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         //          TESTS
-        // String filePath = "Dataset obligatorio.csv";
-        // spotify.loadData(filePath);
-        //1.
-        //spotify.OrderTop10("ZA", "2024-05-13" );
-        //System.out.println("done");
-        //3.
-        // DateRange dateRange = new DateRange("2024-05-01", "2024-05-31");
-        // spotify.getTop7Artists(dateRange);
-        // System.out.println("done");
-        //2.
-//        LocalDate songDate = LocalDate.parse("2024-03-18");
+         String filePath = "Dataset obligatorio.csv";
+//         spotify.loadData(filePath);
+//        1.
+        spotify.OrderTop10("ZA", "2024-05-04" );
+        System.out.println("done");
+////        3.
+//         DateRange dateRange = new DateRange("2024-05-01", "2024-05-31");
+//         spotify.getTop7Artists(dateRange);
+//         System.out.println("done");
+////        2.
+//        LocalDate songDate = LocalDate.parse("2024-05-04");
 //        spotify.getTop5Songs(songDate);
 //        System.out.println("done");
-        //4.
-        //LocalDate songDate = LocalDate.parse("2024-05-13");
-        //spotify.getArtistData(songDate, "Taylor Swift");
-        //spotify.getTop5Songs(songDate);
-        //spotify.getArtistData(songDate, "Taylor Swift");
-        //System.out.println("done");
-        //2.
-        //spotify.getTop5Songs(songDate);
-        //System.out.println("done");
-        // 5.
-//        DateRange dateRange = new DateRange("2024-05-01", "2024-05-31");
-//        float minTempo = 100.000f;
-//        float maxTempo = 100.001f;
-//        spotify.countSongsByTempo(dateRange, minTempo, maxTempo);
+////        4.
+//        spotify.getArtistData(songDate, "Taylor Swift");
 //        System.out.println("done");
+
+//        2.
+//        spotify.getTop5Songs(songDate);
+//        System.out.println("done");
+//         5.
+        DateRange dateRange = new DateRange("2024-01-01", "2024-03-18");
+        float minTempo = 100.000f;
+        float maxTempo = 110.000f;
+        spotify.countSongsByTempo(dateRange, minTempo, maxTempo);
+        System.out.println("done");
 
         while(true){
             System.out.println("Seleccione el reporte que desea realizar: ");
@@ -94,9 +92,9 @@ public class Main {
                     System.out.println("Ingrese la fecha de fin (YYYY-MM-DD):");
                     String endDate2 = scanner.nextLine();
                     System.out.println("Ingrese el tempo mínimo:");
-                    Float minTempo = scanner.nextFloat();
-                    System.out.println("Ingrese el tempo máximo:");
-                    Float maxTempo = scanner.nextFloat();
+//                    Float minTempo = scanner.nextFloat();
+//                    System.out.println("Ingrese el tempo máximo:");
+//                    Float maxTempo = scanner.nextFloat();
                     DateRange tempoRange = new DateRange(startDate2, endDate2);
                     spotify.countSongsByTempo(tempoRange, minTempo, maxTempo);
                     break;

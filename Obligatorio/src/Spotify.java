@@ -16,11 +16,6 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class Spotify {
-    // 1er reporte
-    MyHash<String, Artist> artists = new MyHashImpl<>();
-    MySearchBinaryTree<Integer, String> top7ArtistTree = new MySearchBinaryTreeImpl<>();
-    MySearchBinaryTree<Integer, String> top5SongTree = new MySearchBinaryTreeImpl<>();
-    MyHash<String, Song> songs = new MyHashImpl<>();
 
     /* 1er reporte
         Top 10 canciones en un país en un día dado. Este reporte debe incluir el nombre de
@@ -29,10 +24,9 @@ public class Spotify {
      */
 
     public MySearchBinaryTree<Integer, ArrayList<String>> Top10tree(String pais, String date) throws FileNotFoundException {
+        MySearchBinaryTree<Integer, ArrayList<String>> top10songTree = new MySearchBinaryTreeImpl<>();
         String path1 = "/Users/aguscayrus/universal_top_spotify_songs-1.csv";
         String path2 = "\"C:\\Users\\smdf2\\OneDrive\\Escritorio\\Facultad\\3er Semestre\\Programación 2\\Dataset obligatorio.csv\"";
-
-        MySearchBinaryTree<Integer, ArrayList<String>> top10songTree = new MySearchBinaryTreeImpl<>();
 
         try {
             BufferedReader br;
@@ -58,7 +52,6 @@ public class Spotify {
                     list.add(data[1]);
                     list.add(data[2]);
                     list.add(data[3]);
-                    //TODO: filter songs where Rank > 10
                     top10songTree.add(Integer.parseInt(data[3]), list);
                 }
             }
@@ -80,7 +73,7 @@ public class Spotify {
     public void OrderTop10(String country, String date) throws FileNotFoundException {
         MySearchBinaryTree<Integer, ArrayList<String>> top10 = Top10tree(country, date);
         MyList<ArrayList<String>> inOrderList = top10.inOrderWithValues();
-        for (int i = 1; i <= 10; i++) {
+        for (int i = 0; i <= 9; i++) {
             ArrayList<String> song = inOrderList.get(i);
             System.out.println("Puesto: " + song.get(2) + ", Canción: " + song.get(0) + ", Artista: " + song.get(1));
         }
@@ -92,24 +85,26 @@ public class Spotify {
         orden n en notación Big O.
      */
 
-    public void getSongData(LocalDate date) {
+    public MyHash<String, Song> getSongData(LocalDate date) {
         String path1 = "/Users/aguscayrus/universal_top_spotify_songs-1.csv";
         String path2 = "C:\\Users\\smdf2\\OneDrive\\Escritorio\\Facultad\\3er Semestre\\Programación 2\\Dataset obligatorio.csv";
 
         try (BufferedReader br = new BufferedReader(new FileReader(path1))) {
-            getCountSongs(br, date);
+            return getCountSongs(br, date);
         } catch (FileNotFoundException e) {
             try (BufferedReader br = new BufferedReader(new FileReader(path2))) {
-                getCountSongs(br, date);
+                return getCountSongs(br, date);
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return null;
     }
 
-    private void getCountSongs(BufferedReader br, LocalDate date) throws IOException {
+    private MyHash<String, Song> getCountSongs(BufferedReader br, LocalDate date) throws IOException {
+        MyHash<String, Song> songs = new MyHashImpl<>();
         String line;
         br.readLine();
         while ((line = br.readLine()) != null) {
@@ -133,10 +128,12 @@ public class Spotify {
                 }
             }
         }
+        return songs;
     }
 
     public void getTop5Songs (LocalDate date){
-        getSongData(date);
+        MySearchBinaryTree<Integer, String> top5SongTree = new MySearchBinaryTreeImpl<>();
+        MyHash<String, Song> songs = getSongData(date);
         for (int i = 0; i < songs.getSize(); i++) {
             Song song = songs.getIndex(i);
             if (song != null) {
@@ -161,24 +158,26 @@ public class Spotify {
         Si un artista tiene 10 canciones en el top 50, deben contabilizarse 10 ocurrencias.
      */
 
-    public void insertSongsToArtists (DateRange dates){
+    public MyHash<String, Artist> insertSongsToArtists (DateRange dates){
         String path1 = "/Users/aguscayrus/universal_top_spotify_songs-1.csv";
         String path2 = "C:\\Users\\smdf2\\OneDrive\\Escritorio\\Facultad\\3er Semestre\\Programación 2\\Dataset obligatorio.csv";
 
         try (BufferedReader br = new BufferedReader(new FileReader(path1))) {
-            insertArtists(br, dates);
+            return insertArtists(br, dates);
         } catch (FileNotFoundException e) {
             try (BufferedReader br = new BufferedReader(new FileReader(path2))) {
-                insertArtists(br, dates);
+                return insertArtists(br, dates);
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return null;
     }
 
-    private void insertArtists (BufferedReader br, DateRange dates) throws IOException {
+    private MyHash<String, Artist> insertArtists (BufferedReader br, DateRange dates) throws IOException {
+        MyHash<String, Artist> artists = new MyHashImpl<>();
         String line;
         br.readLine();
         while ((line = br.readLine()) != null) {
@@ -206,24 +205,13 @@ public class Spotify {
                 }
             }
         }
-    }
-
-
-    public Artist findOrCreateArtist (String artistName){
-        Artist artist = artists.getValue(artistName);
-        if (artist == null) {
-            Artist newArtist = new Artist(artistName);
-            artists.put(artistName, newArtist);
-            return newArtist;
-        } else {
-            artist.increaseCounter();
-            return artist;
-        }
+        return artists;
     }
 
 
     public void getTop7Artists (DateRange dates){
-        insertSongsToArtists(dates);
+        MySearchBinaryTree<Integer, String> top7ArtistTree = new MySearchBinaryTreeImpl<>();
+        MyHash<String, Artist> artists = insertSongsToArtists(dates);
         for (int i = 0; i < artists.getSize(); i++) {
             Artist artist = artists.getIndex(i);
             if (artist != null) {
@@ -263,7 +251,7 @@ public class Spotify {
     }
 
     private void getCountArtist(BufferedReader br, LocalDate date, String nameArtist) throws IOException {
-
+        Artist artist = new Artist(nameArtist);
         String line;
         br.readLine();
         while ((line = br.readLine()) != null) {
@@ -278,57 +266,16 @@ public class Spotify {
             if (date.equals(songDate)) {
                 String[] artistNames = data[2].replaceAll("\"$", "").split(", ");
                 for (String name : artistNames) {
-                    // String artistName = name.replaceAll("\"$", "");
-                    if (name.equals(nameArtist)) {
-                        Artist artist = findOrCreateArtist(nameArtist);
+                    String artistName = name.replaceAll("\"$", "");
+                    if (artistName.equals(nameArtist)) {
                         artist.increaseCounter();
                     }
                 }
             }
         }
-        Artist thisArtist = findOrCreateArtist(nameArtist);
-        if (thisArtist == null) {
-            throw new FileNotFoundException();
-        }
-        System.out.println(thisArtist.getName() + " had " + thisArtist.getCounter() + " appearances on top50's on " + date.toString());
+        System.out.println(artist.getName() + " had " + artist.getCounter() + " appearances on top50's on " + date.toString());
     }
 
-    public void insertSongs (DateRange dates){
-        String path1 = "/Users/aguscayrus/universal_top_spotify_songs-1.csv";
-        String path2 = "C:\\Users\\smdf2\\OneDrive\\Escritorio\\Facultad\\3er Semestre\\Programación 2\\Dataset obligatorio.csv";
-
-        try {
-            BufferedReader br;
-
-            try {
-                br = new BufferedReader(new FileReader(path1));
-            } catch (FileNotFoundException e1) {
-                br = new BufferedReader(new FileReader(path2));
-            }
-
-            String line = br.readLine();
-            while ((line = br.readLine()) != null) {
-                line = line.replace("\"\"", "\"").replaceAll("^\"|\"$", "");
-                String[] data = line.split(",\"");
-                for (int i = 0; i < data.length; i++) {
-                    data[i] = data[i].replace("\"", "");
-                }
-                LocalDate songDate = LocalDate.parse(data[7]);  // Assuming data[7] is the date
-                if (dates.contains(songDate)) {
-                    String[] artistNames = data[2].split(", ");  // Assuming data[2] is the artist field
-
-                    for (String artistName : artistNames) {
-                        // Create a new Artist object or retrieve existing one if available
-                        Artist artist = findOrCreateArtist(artistName);
-                        artist.increaseCounter();
-                        // Output for verification (print or further processing)
-                    }
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     /* 5to reporte
         Cantidad de canciones con un tempo en un rango específico para un rango
@@ -336,6 +283,7 @@ public class Spotify {
      */
 
     public Song findOrCountSong (String songName){
+        MyHash<String, Song> songs = new MyHashImpl<>();
         Song song = songs.getValue(songName);
         if (song == null) {
             Song newSong = new Song(songName);
