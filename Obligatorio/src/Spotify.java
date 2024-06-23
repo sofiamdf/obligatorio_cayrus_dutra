@@ -131,7 +131,7 @@ public class Spotify {
         return songs;
     }
 
-    public void getTop5Songs (LocalDate date){
+    public void getTop5Songs(LocalDate date) {
         MySearchBinaryTree<Integer, String> top5SongTree = new MySearchBinaryTreeImpl<>();
         MyHash<String, Song> songs = getSongData(date);
         for (int i = 0; i < songs.getSize(); i++) {
@@ -158,7 +158,7 @@ public class Spotify {
         Si un artista tiene 10 canciones en el top 50, deben contabilizarse 10 ocurrencias.
      */
 
-    public MyHash<String, Artist> insertSongsToArtists (DateRange dates){
+    public MyHash<String, Artist> insertSongsToArtists(DateRange dates) {
         String path1 = "/Users/aguscayrus/universal_top_spotify_songs-1.csv";
         String path2 = "C:\\Users\\smdf2\\OneDrive\\Escritorio\\Facultad\\3er Semestre\\Programación 2\\Dataset obligatorio.csv";
 
@@ -176,7 +176,7 @@ public class Spotify {
         return null;
     }
 
-    private MyHash<String, Artist> insertArtists (BufferedReader br, DateRange dates) throws IOException {
+    private MyHash<String, Artist> insertArtists(BufferedReader br, DateRange dates) throws IOException {
         MyHash<String, Artist> artists = new MyHashImpl<>();
         String line;
         br.readLine();
@@ -209,7 +209,7 @@ public class Spotify {
     }
 
 
-    public void getTop7Artists (DateRange dates){
+    public void getTop7Artists(DateRange dates) {
         MySearchBinaryTree<Integer, String> top7ArtistTree = new MySearchBinaryTreeImpl<>();
         MyHash<String, Artist> artists = insertSongsToArtists(dates);
         for (int i = 0; i < artists.getSize(); i++) {
@@ -234,7 +234,7 @@ public class Spotify {
         dada.
      */
 
-    public void getArtistData(LocalDate date, String nameArtist){
+    public void getArtistData(LocalDate date, String nameArtist) {
         String path1 = "/Users/aguscayrus/universal_top_spotify_songs-1.csv";
         String path2 = "C:\\Users\\smdf2\\OneDrive\\Escritorio\\Facultad\\3er Semestre\\Programación 2\\Dataset obligatorio.csv";
         try (BufferedReader br = new BufferedReader(new FileReader(path1))) {
@@ -282,7 +282,7 @@ public class Spotify {
         específico de fechas.
      */
 
-    public Song findOrCountSong (String songName){
+    public Song findOrCountSong(String songName) {
         MyHash<String, Song> songs = new MyHashImpl<>();
         Song song = songs.getValue(songName);
         if (song == null) {
@@ -294,7 +294,7 @@ public class Spotify {
         }
     }
 
-    public void countSongsByTempo (DateRange dates,float minTempo, float maxTempo) {
+    public void countSongsByTempo(DateRange dates, float minTempo, float maxTempo) {
         String path1 = "/Users/aguscayrus/universal_top_spotify_songs-1.csv";
         String path2 = "C:\\Users\\smdf2\\OneDrive\\Escritorio\\Facultad\\3er Semestre\\Programación 2\\Dataset obligatorio.csv";
 
@@ -323,7 +323,7 @@ public class Spotify {
                 if (dates.contains(songDate)) {
                     float tempo = Float.parseFloat(data[23]); // data[23] es el tempo
                     if (tempo >= minTempo && tempo <= maxTempo) {
-                        if(findOrCountSong(data[1]) == null) {
+                        if (findOrCountSong(data[1]) == null) {
                             count++;
                         }
                     }
